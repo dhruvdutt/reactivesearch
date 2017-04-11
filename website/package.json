@@ -1,1 +1,31 @@
-{}
+{
+  "scripts": {
+    "start": "npm-run-all --parallel babel sass postcss browsersync",
+    "babel": "babel --watch src/js --out-dir dist/js",
+    "sass": "node-sass --watch src/css --output-style compressed --output dist/css",
+    "postcss": "postcss dist/css/style.css --watch --use autoprefixer --output dist/css/style.posted.css",
+    "browsersync": "browser-sync start --server --no-notify --no-open --files={*,**/*}.html,dist/{*,**/*}",
+    "imagemin": "imagemin-dir src/img dist/img"
+  },
+  "babel": {
+    "presets": [
+      "stage-0",
+      "es2015"
+    ]
+  },
+  "browserslist": [
+    "> 0%"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^6.7.7",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "browser-sync": "^2.18.8",
+    "imagemin-cli": "^3.0.0",
+    "imagemin-cli-preserve-dir-structure": "^0.0.2",
+    "node-sass": "^4.5.2",
+    "npm-run-all": "^4.0.2",
+    "postcss-cli": "^3.1.1"
+  }
+}

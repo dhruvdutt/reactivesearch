@@ -1,0 +1,280 @@
+@import 'reeeset';
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,900');
+
+$c0: #FFFDE7;
+$c1: #2251D1;
+$c2: #FFD600;
+$c2-dark: darken($c2, 27%);
+$c3: #F50057;
+$c4: #5B5B5B;
+
+$tablet: 700px;
+
+@mixin debug() {
+  * {
+    background: rgba(blue, .05);
+  }
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  line-height: 1.618;
+  color: lighten(black, 30%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: lighten(black, 20%);
+}
+
+.center {
+  max-width: 1000px;
+  padding: 0 30px;
+  margin: auto;
+}
+
+.masthead--blue {
+  background: $c1;
+  color: white;
+
+  h1 {
+    color: white;
+  }
+
+  @media (min-width: $tablet) {
+    background: radial-gradient(lighten($c1, 20%), $c1);
+  }
+
+  // Nav
+  .primary-nav {
+    nav {
+      a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+          background: rgba(darken($c1, 2%), .5);
+        }
+      }
+
+      .login {
+        background: none;
+        color: white;
+        border: 2px solid white;
+
+        &:hover {
+          background: white;
+          color: $c1;
+        }
+      }
+    }
+  }
+
+  // Hero
+  .js-swapper {
+    background: darken($c1, 5%);
+
+    @media (min-width: $tablet) {
+      background: $c1;
+    }
+  }
+}
+
+.primary-nav {
+  display: flex;
+  align-items: center;
+  height: 100px;
+
+  nav {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: block;
+      transition: all 400ms ease;
+      padding: 3px 13px;
+      margin-left: 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+    }
+  }
+}
+
+.logo {
+  margin: 15px auto 15px 0;
+
+  img {
+    display: block;
+    height: 30px;
+  }
+}
+
+.hero {
+  padding: 100px 0 175px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(black, .05);
+
+  h1 {
+    font-size: 3rem;
+    letter-spacing: -.005em;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+    > * {
+      margin: 0 15px;
+    }
+
+    .github-button-wrap {
+      position: relative;
+      top: 8px;
+    }
+
+    .tutorial-button {
+      background: $c2;
+      color: $c2-dark;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 10px 30px;
+      border-radius: 3px;
+      text-shadow: none;
+      transition: all 400ms ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.text {
+  > * {
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.js-swapper {
+  font-weight: bold;
+  padding: 2px 5px;
+  margin: 0 1px;
+  border-radius: 1px;
+}
+
+.component-gallery {
+  padding-top: 30px;
+  background: $c0;
+
+  .section-heading {
+    color: $c4;
+  }
+
+  .grid {
+    position: relative;
+    z-index: 1;
+    margin: 0 -15px;
+
+    > * {
+      float: left;
+      width: calc(100% * 1/3 - 30px);
+      margin: 0 15px 30px;
+
+      // Ensure cards slideToggle on top of other cards
+      position: relative;
+
+      @for $i from 1 through 30 {
+        &:nth-child(#{$i}) {
+          z-index: -($i);
+        }
+      }
+    }
+
+    .card--big {
+      width: calc(100% * 2/3 - 30px);
+    }
+
+    .card--full {
+      width: calc(100% - 30px);
+    }
+  }
+}
+
+[class*="card"] {
+  background: white;
+  font-size: 15px;
+  border-radius: 3px;
+  overflow: hidden;
+
+  img {
+    display: block;
+  }
+
+  .text {
+    padding: 27px 30px 30px;
+    border: 1px solid #D4D2C4;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
+  .buttons {
+    display: flex;
+    margin-top: 27px;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      margin-right: 15px;
+      padding: 5px 10px;
+      border-radius: 2px;
+      background: $c3;
+      transition: all 400ms ease;
+
+      &:hover {
+        background: darken($c3, 10%);
+      }
+    }
+  }
+
+  code {
+    display: none;
+    tab-size: 2;
+
+    pre {
+      padding: 15px;
+      border-radius: 2px;
+      background: darken(white, 1%);
+      border: 1px solid darken(white, 5%);
+      font-size: 12px;
+    }
+  }
+}
+
+.example-apps {
+  background: $c4;
+  color: white;
+  padding: 30px 0;
+
+  .section-heading {
+    color: white;
+  }
+}
+
+.section-heading {
+  text-align: center;
+  margin: 30px 0 60px;
+}
