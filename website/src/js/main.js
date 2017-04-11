@@ -17,4 +17,12 @@ $('.js-show-example').on('click', e => {
   })
 })
 
+// Slider
+$('.slider').flickity({
+  contain: true,
+  wrapAround: true,
+  groupCells: 1,
+  pageDots: false
+})
+
 // @todo Swapper
