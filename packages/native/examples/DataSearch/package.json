@@ -14,8 +14,8 @@
     "escape-string-regexp": "^1.0.5",
     "expo": "^23.0.0",
     "metro-bundler": "^0.22.1",
-    "native-base": "^2.3.3",
-    "react": "16.0.0",
+    "native-base": "^2.3.7",
+    "react": "^16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
     "react-native-calendars": "^1.16.1",
     "react-native-communications": "^2.2.1",
@@ -31,7 +31,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "babel-preset-expo": "^1.0.1",
     "prop-types": "^15.6.0",
-    "react-dom": "^16.1.1",
+    "react-dom": "^16.2.1",
     "react-native-scripts": "0.0.50"
   },
   "main": "src/App.js"
