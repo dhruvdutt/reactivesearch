@@ -19,12 +19,17 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "compression-webpack-plugin": "^1.1.7",
     "css-loader": "^0.28.7",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.5"
+    "gzip-loader": "^0.0.1",
+    "uglifyjs-webpack-plugin": "^1.2.0",
+    "webpack": "^4.0.0-beta.2",
+    "webpack-cli": "^2.0.6",
+    "webpack-common-shake": "^1.5.3",
+    "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
-    "build": "webpack -p --progress",
+    "build": "webpack --mode production --progress",
     "start": "webpack-dev-server --hot --inline --progress --colors --port 8001"
   }
 }

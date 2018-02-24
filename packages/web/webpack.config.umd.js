@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const BabiliPlugin = require("babili-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	cache: true,
@@ -46,21 +47,23 @@ module.exports = {
 			"process.env.VERSION": JSON.stringify(require("./package.json").version)
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false,
-				screw_ie8: true,
-				conditionals: true,
-				unused: true,
-				comparisons: true,
-				sequences: true,
-				dead_code: true,
-				evaluate: true,
-				join_vars: true,
-				if_return: true
-			},
-			output: {
-				comments: false
+		new UglifyJsPlugin({
+			uglifyOptions: {
+				compress: {
+					warnings: false,
+					conditionals: true,
+					unused: true,
+					comparisons: true,
+					sequences: true,
+					dead_code: true,
+					evaluate: true,
+					join_vars: true,
+					if_return: true,
+					side_effects: false,
+				},
+				output: {
+					comments: false
+				}
 			}
 		}),
 		new BabiliPlugin(),
