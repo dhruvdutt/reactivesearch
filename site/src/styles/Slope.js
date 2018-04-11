@@ -39,7 +39,7 @@ const Slope = styled('div')`
 		transform: skewY(-5deg);
 		top: -100px;
 
-	${queries.xLarge`
+${queries.xLarge`
 		img {
 			position: absolute;
 			right: -150px;
@@ -47,11 +47,11 @@ const Slope = styled('div')`
 	`};
 	}
 
-	${queries.medium`
+${queries.medium`
 		transform: none;
 	`};
 
-	${props => (
+${props => (
 		props.border
 			? `&:after {
 				content: '';
@@ -69,7 +69,7 @@ const Slope = styled('div')`
 				transform-origin: 0;
 			}`
 			: null)}
-	`;
+`;
 
 const WhiteBackdrop = styled('div')`
 	height: calc((45vw));
@@ -80,9 +80,9 @@ const WhiteBackdrop = styled('div')`
 	transform: translate(0,150px) skewY(${props => (props.degree ? props.degree : 8)}deg);
 	z-index: -2;
 
-	${queries.medium`
+${queries.medium`
 		display: none;
 	`};
-	`;
+`;
 
 export { Slope, SlopeWrapper, WhiteBackdrop };
