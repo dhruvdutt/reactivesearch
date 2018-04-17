@@ -43,6 +43,7 @@ class GeoDistanceDropdown extends Component {
 		this.type = 'geo_distance';
 		this.locked = false;
 		this.coordinates = null;
+		this.userLocationCoordinates = null;
 		this.autocompleteService = null;
 
 		if (props.autoLocation) {
@@ -154,15 +155,18 @@ class GeoDistanceDropdown extends Component {
 		return null;
 	};
 
-	getUserLocation() {
+	getUserLocation = () => {
 		navigator.geolocation.getCurrentPosition((location) => {
 			const coordinates = `${location.coords.latitude}, ${location.coords.longitude}`;
-
+			this.userLocationCoordinates = coordinates;
 			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${this.props.mapKey}&v=3.31&latlng=${coordinates}`)
 				.then(res => res.json())
 				.then((res) => {
 					if (Array.isArray(res.results) && res.results.length) {
-						const userLocation = res.results[0].formatted_address;
+						let userLocation = res.results[0].formatted_address;
+						if (this.props.formatAutoLocation) {
+							userLocation = this.props.formatAutoLocation(res.results[0].address_components);
+						}
 						this.setState({
 							userLocation,
 						});
@@ -174,9 +178,20 @@ class GeoDistanceDropdown extends Component {
 		});
 	}
 
-	getCoordinates(value, cb) {
-		if (value) {
-			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${this.props.mapKey}&v=3.31&address=${value}`)
+	getCoordinates = (selectedValue, cb) => {
+		// check if selectedValue contains dataField geo-points
+		if (selectedValue[this.props.dataField]) {
+			const { lat, lon: lng } = selectedValue[this.props.dataField];
+			this.coordinates = `${lat}, ${lng}`;
+			if (cb) cb();
+		} else if (selectedValue.label && selectedValue.label === 'Use my current location') {
+			this.coordinates = this.userLocationCoordinates;
+			if (cb) cb();
+		} else {
+			// check if selectedValue contains `value` (passed from suggestions)
+			// else use selectedValue directly (passed with `location` value)
+			const addressValue = selectedValue.value ? selectedValue.value : selectedValue;
+			fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${this.props.mapKey}&v=3.31&address=${addressValue}`)
 				.then(res => res.json())
 				.then((res) => {
 					if (Array.isArray(res.results) && res.results.length) {
@@ -441,6 +456,7 @@ GeoDistanceDropdown.propTypes = {
 	dataField: types.stringRequired,
 	defaultSelected: types.selectedValue,
 	filterLabel: types.string,
+	formatAutoLocation: types.func,
 	icon: types.children,
 	iconPosition: types.iconPosition,
 	innerClass: types.style,
